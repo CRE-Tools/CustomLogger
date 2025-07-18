@@ -17,11 +17,14 @@ namespace PUCPR.CustomLogger.Editor
             if (script.isValidKeys)
             {
                 if (script.NeedToApplyChanges())
-                    if (GUILayout.Button("Apply enum logger"))
+                    if (GUILayout.Button("Apply Settings"))
                         script.ApplyNewInspectorValues();
             }
             else
-                EditorGUILayout.HelpBox("Invalid Key Name: " + script.helpMsg, MessageType.Warning);
+            {
+                Debug.Log(script.isValidKeys);
+                EditorGUILayout.HelpBox("Invalid KeyName at element " + script.helpMsg, MessageType.Warning);
+            }
         }
 
         void OnDisable()

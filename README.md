@@ -8,13 +8,15 @@
 
 ## About
 
-`#DESCRIPTION#`
-
-### Unity Versions
-- `UNITY VERSIONS`
+Custom Logger is a Unity development tool that centralizes and manages the Unity console logging system. The system allows creating personalized debug configurations, where each configuration is identified by a unique key. This facilitates the management and organization of logs during development.
 
 ### Features
-- `#FEATURES#`
+- Centralized log management in Unity console
+- Customizable debug configurations by key
+- Color customization per configuration
+- Configuration-level log activation/deactivation
+- Support for multiple independent configurations
+- Bulk control of logs related to a single configuration
 
 ## How to Install
 

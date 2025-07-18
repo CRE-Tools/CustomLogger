@@ -4,15 +4,15 @@ using UnityEngine;
 namespace PUCPR.CustomLogger
 {
    [Serializable]
-    public class CustomLoggerTypes
+    public class CustomLoggerType
     {
         public string keyName;
         public Color color;
         public bool showLog;
 
-        public CustomLoggerTypes()
+        public CustomLoggerType()
         {
-            this.keyName = "newType";
+            this.keyName = "NewType";
             this.color = Color.white;
             this.showLog = true;
         }
