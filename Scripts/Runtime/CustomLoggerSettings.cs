@@ -20,6 +20,7 @@ namespace PUCPR.CustomLogger
         [HideInInspector] public bool isValidKeys = true;
         [HideInInspector] public string helpMsg;
         private static string[] _reservedKeys = { "as", "int", "float", "bool", "string", "object", "unityObject" };
+        private static string[] _defaultKeys = { "NeverLog", "AlwaysLog" };
 
 
         private void OnValidate()
@@ -34,7 +35,7 @@ namespace PUCPR.CustomLogger
         {
             foreach (var key in _keyLogs)
             {
-                int index = _keyLogs.IndexOf(key) - 1;
+                int index = _keyLogs.IndexOf(key) - _defaultKeys.Length;
 
                 if (string.IsNullOrEmpty(key))
                     return (false, $"{index}:\n String Empty");
@@ -51,7 +52,7 @@ namespace PUCPR.CustomLogger
                 int count = _keyLogs.Count(x => x.ToLower() == key.ToLower());
                 if (count > 1)
                 {
-                    if (key == "None")
+                    if (_defaultKeys.Contains(key))
                         return (false, $"{index}:\n\"{key}\" Is reserved");
                     return (false, $"{index}:\n\"{key}\" Is already used");
                 }
@@ -62,7 +63,8 @@ namespace PUCPR.CustomLogger
 
         private static List<string> ConstructKeyNames(CustomLoggerType[] newLogger)
         {
-            List<string> keysNames = new List<string>() { "None" };
+            List<string> keysNames = new List<string>();
+            keysNames = _defaultKeys.ToList();
 
             foreach (var logger in newLogger)
                 keysNames.Add(logger.keyName);
@@ -78,7 +80,7 @@ namespace PUCPR.CustomLogger
             if (settings == null)
             {
                 settings = ScriptableObject.CreateInstance<CustomLoggerSettings>();
-                settings._loggers = new CustomLoggerType[] { new CustomLoggerType() };
+                settings._loggers = new CustomLoggerType[] { };
 
                 if (!Directory.Exists(k_LoggerSettingsPath))
                     Directory.CreateDirectory(k_LoggerSettingsPath);
@@ -97,7 +99,7 @@ namespace PUCPR.CustomLogger
 
         internal static (bool showLog, string color) GetLoggerTypeSettings(CustomLoggerKey logKey)
         {
-            if (logKey == CustomLoggerKey.None || logKey < 0)
+            if (logKey < 0)
                 return (false, "");
 
             var settings = GetOrCreateSettings();
@@ -105,7 +107,7 @@ namespace PUCPR.CustomLogger
             if ((int)logKey > settings._loggers.Length)
                 return (false, "");
 
-            CustomLoggerType logger = settings._loggers[(int)logKey - 1];
+            CustomLoggerType logger = settings._loggers[(int)logKey - _defaultKeys.Length];
             string color = ColorUtility.ToHtmlStringRGB(logger.color);
 
             return (logger.showLog, color);

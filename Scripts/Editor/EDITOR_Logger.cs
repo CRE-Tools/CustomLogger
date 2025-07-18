@@ -21,10 +21,7 @@ namespace PUCPR.CustomLogger.Editor
                         script.ApplyNewInspectorValues();
             }
             else
-            {
-                Debug.Log(script.isValidKeys);
                 EditorGUILayout.HelpBox("Invalid KeyName at element " + script.helpMsg, MessageType.Warning);
-            }
         }
 
         void OnDisable()
