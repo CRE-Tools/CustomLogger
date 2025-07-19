@@ -8,7 +8,8 @@ namespace PUCPR.CustomLogger
     {
         public static void DebugLog(LogType logType, Object objContext, string message, CustomLoggerKey key)
         {
-            if (key == CustomLoggerKey.NeverLog) return;
+            if (key == CustomLoggerKey.NeverLog)
+                return;
 
             string color = "FFFFFF";
 
@@ -16,7 +17,9 @@ namespace PUCPR.CustomLogger
             {
                 var LogSettings = CustomLoggerSettings.GetLoggerTypeSettings(key);
 
-                if (!LogSettings.showLog) return;
+                if (!LogSettings.showLog)
+                    return;
+
                 color = LogSettings.color;
             }
 

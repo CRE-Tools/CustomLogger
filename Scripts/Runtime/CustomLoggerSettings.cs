@@ -104,7 +104,7 @@ namespace PUCPR.CustomLogger
 
             var settings = GetOrCreateSettings();
 
-            if ((int)logKey > settings._loggers.Length)
+            if ((int)logKey >= settings._keyLogs.Count)
                 return (false, "");
 
             CustomLoggerType logger = settings._loggers[(int)logKey - _defaultKeys.Length];
