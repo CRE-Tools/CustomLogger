@@ -1,0 +1,18 @@
+{
+    "name": "com.pucpr.customlogger.editor",
+    "rootNamespace": "PUCPR.CustomLogger.Editor",
+    "references": [
+        "GUID:f604b3e51c3cbba44be77203b0dabbd1"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
