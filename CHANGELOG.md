@@ -1,4 +1,17 @@
-## [0.1.0] - YYYY-MM-DD
+## [0.2.0] - 2025-07-18
+
+### Added
+- Scripts/Editor:
+  - `EDITOR_Logger.cs` - Custom Editor for CustomLoggerSettings.cs
+- Scripts/Runtime:
+  - `CodeGenerator.cs` - Code generation utility with Enum generation support
+  - `CustomLogger.cs` - Main logger implementation
+  - `CustomLoggerKey.cs` - Generated enum for logger keys
+  - `CustomLoggerSettings.cs` - Settings configuration
+  - `CustomLoggerType.cs` - Logger type definition
+
+
+## [0.1.0] - 2025-07-17
 
 ### Added
 - This CHANGELOG
