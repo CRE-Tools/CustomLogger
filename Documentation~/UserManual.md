@@ -3,6 +3,9 @@
 
 <h1 align="center">User Manual</h1>
 
+> [!IMPORTANT]
+> As of version 0.3.0, the logging system has been updated to use an intercepting log handler. The `CustomLogger.DebugLog` method is now obsolete and will be removed in the next version. Please update your code to use the new logging approach.
+
 ### Contents
 1. [Introduction](#introduction)
    - [Overview](#overview)
@@ -39,6 +42,7 @@ Custom Logger is a Unity development tool that provides a powerful and flexible 
   - Supports standard Unity log types (Log, Warning, Error)
   - Automatic type identification in logs
   - Color-coded output for better readability
+  - Intercepting log handler for seamless integration with Unity's logging system
 
 - **Easy Integration**
   - Simple setup through Unity Package Manager
@@ -78,8 +82,23 @@ Here's a quick example of how to use Custom Logger in your code:
 
 Using Custom Logger
 - Use namespace PUCPR.CustomLogger
-- Use Custom.Logger.DebugLog method to log messages passing: LogType (Log, Warning, Error), "this" as the object that is logging, the message and a key from CustomLoggerKey.AlwaysLog (this key is a default key that is always enabled)
 
+#### New Basic Approach (v0.3.0+):
+```csharp
+using UnityEngine;
+using PUCPR.CustomLogger;
+
+public class ExampleClass : MonoBehaviour
+{
+    private void Start()
+    {
+        // New approach using Unity's built-in Debug methods, basic with always log
+        Debug.LogFormat("Game started", CustomLoggerKey.AlwaysLog);
+    }
+}
+```
+
+#### Legacy Approach (Deprecated):
 ```csharp
 using PUCPR.CustomLogger;
 
@@ -87,10 +106,13 @@ public class ExampleClass : MonoBehaviour
 {
     private void Start()
     {
+        // Deprecated: Will be removed in next version
         CustomLogger.DebugLog(LogType.Log, this, "Game started", CustomLoggerKey.AlwaysLog);
     }
 }
 ```
+
+The new approach provides the same functionality but integrates directly with Unity's logging system, making it more flexible and performant.
 
 If you want to use a custom key, you can configure a new key in the settings file.   
 This will generate a new enum value in the CustomLoggerKey enum.   
@@ -126,8 +148,8 @@ public class ExampleClass : MonoBehaviour
  
     private void Start()
     {
-       //This will log "Game started" with color red as long as the key "MyKey" is enabled
-       CustomLogger.DebugLog(LogType.Log, this, "Game started", myKey);
+       //This will log a warning "Game started" with color red as long as the key "MyKey" is enabled
+       Debug.LogFormat(this, "Game started", myKey, LogType.Warning);
     }
 }
 ```
@@ -145,12 +167,14 @@ public class ExampleClass : MonoBehaviour
 -Package/CustomLogger/Scripts/
   - Runtime/
     - CodeGenerator.cs (this is the code generator that generates the CustomLoggerKey enum)
-    - CustomLogger.cs (this is the main class for logging where the DebugLog method is)
+    - CustomLogger.cs (this is the legacy class for logging - deprecated in v0.3.0)
     - CustomLoggerType.cs (this is object type that configurations for keys are stored in the settings file)
     - CustomLoggerKey.cs (auto generated enum with all the keys configured in the settings file)
     - CustomLoggerSettings.cs (this is the settings manager that handles the settings file)
   - Editor/
     - EDITOR_Logger.cs (Custom Editor for the settings file)
+    - InterceptingLogHandler.cs (Intercepts Unity log messages and applies custom formatting)
+    - InterceptingLogInitializer.cs (Initializes the intercepting log handler)
 
 ### Settings
 - `Assets/LoggerSettings/Loggers.asset`: Contains all configurable settings per configuration key including:
@@ -163,12 +187,14 @@ public class ExampleClass : MonoBehaviour
    - Each configuration is identified by a unique key
    - Configurations can be enabled/disabled in the settings file
    - Each configuration can have its own color settings
+   - The intercepting log handler automatically processes all log messages and applies custom formatting to those that have a valid key
 
 2. **Log Types**
 Follow standard log types:
    - Log: Standard information messages
    - Warning: Warning messages
    - Error: Error messages
+   - Pass them as additional parameter in the args array (example: Debug.LogFormat(this, "Game started", CustomLoggerKey.AlwaysLog, LogType.Warning);)
 
 3. **Key System**
    - Each enum value represents a different logging configuration
@@ -182,10 +208,12 @@ Follow standard log types:
 
 2. **Logging Strategy**
    - Log important state changes and errors grouped by configuration key
-   - Use appropriate log types (Log, Warning, Error)
-   - Pass "this" as the object that is logging for identification of the source of the log
-   - Use AlwaysLog for fast access to log messages without any additional configuration (notice that this key is always enabled)
-   - Use NeverLog for deactivated messages (notice that this key is always disabled)
+   - Pass CustomLoggerKey as additional parameter in the args array
+   - For log types other than Log (which is default), pass the LogType as additional parameters in the args array
+   - Pass "this" as the context object for better debugging in the Unity console. This will identify the GameObject source of the log
+   - Use AlwaysLog for fast access to log messages without any additional configuration (this key is always enabled)
+   - Use NeverLog to completely disable specific log messages (this key is always disabled)
+   - For custom keys, ensure they are properly configured in the settings
 
 3. **Code Organization**
    - Keep logging configurations organized by feature
@@ -194,7 +222,33 @@ Follow standard log types:
    - Declare key as a field of the class to avoid redeclaring it every time it is used
 
 ### Examples
-#### Basic Logging Example
+#### Basic Logging Example (New Approach)
+```csharp
+using UnityEngine;
+using PUCPR.CustomLogger;
+
+public class ExampleClass : MonoBehaviour
+{
+    [SerializeField] private CustomLoggerKey myKey;
+
+    private void Start()
+    {
+        // Simple log with AlwaysLog (always enabled)
+        Debug.LogFormat(this, "Game started", CustomLoggerKey.AlwaysLog);
+        
+        // Log with custom key (must be configured in settings)
+        Debug.LogFormat(this, "Initializing system...", myKey);
+        
+        // Warning example
+        Debug.LogFormat(this, "This is a warning message", myKey, LogType.Warning);
+        
+        // Error example
+        Debug.LogFormat(this, "An error occurred", myKey, LogType.Error);
+    }
+}
+```
+
+#### Legacy Logging Example (Deprecated)
 ```csharp
 using PUCPR.CustomLogger;
 
@@ -236,9 +290,10 @@ public class GameManager : MonoBehaviour
         catch (Exception e)
         {
             // Log error with error type. Notice that AlwaysLog is always enabled
-            CustomLogger.DebugLog(LogType.Error, this, 
-                $"Failed to load level {levelName}: {e.Message}", 
-                CustomLoggerKey.AlwaysLog);
+            Debug.LogFormat(this, 
+               $"Failed to load level {levelName}: {e.Message}", 
+               CustomLoggerKey.AlwaysLog, 
+               LogType.Error);
         }
     }
 }
@@ -258,9 +313,10 @@ public class ResourceManager : MonoBehaviour
         if (currentMemoryUsage > maxMemoryThreshold)
         {
             // Log warning about high memory usage if resourceDebugKey is enabled
-            CustomLogger.DebugLog(LogType.Warning, this, 
+            Debug.LogFormat(this, 
                 $"Memory usage is high: {currentMemoryUsage}MB", 
-                resourceDebugKey);
+                resourceDebugKey, 
+                LogType.Warning);
         }
     }
 }
@@ -272,6 +328,7 @@ public class ResourceManager : MonoBehaviour
    - Check if the configuration is enabled in settings
    - Verify the correct key is being used
    - Verify that the key is not NeverLog
+   - Verify that the log is called by Debug.LogFormat
 
 2. **Color not applying correctly**
    - Check if the color is properly configured in settings
@@ -288,9 +345,9 @@ public class ResourceManager : MonoBehaviour
    - Select the configuration
    - Adjust the color settings as needed
 
-3. **How do I enable/disable all logs?**
+3. **How do I enable/disable a log configuration?**
    - Open the settings window
-   - Enable/disable all configurations
+   - Enable/disable the configuration
 
 4. **How do I add a new configuration?**
    - Open the settings window

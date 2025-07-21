@@ -3,28 +3,28 @@ using UnityEngine.UIElements;
 
 namespace PUCPR.CustomLogger
 {
-
+    //Obsolete
     public class CustomLogger : MonoBehaviour
     {
-        public static void DebugLog(LogType logType, Object objContext, string message, CustomLoggerKey key)
-        {
-            if (key == CustomLoggerKey.NeverLog)
-                return;
+        // public static void DebugLog(LogType logType, Object objContext, string message, CustomLoggerKey key)
+        // {
+        //     if (key == CustomLoggerKey.NeverLog)
+        //         return;
 
-            string color = "FFFFFF";
+        //     string color = "FFFFFF";
 
-            if (key != CustomLoggerKey.AlwaysLog)
-            {
-                var LogSettings = CustomLoggerSettings.GetLoggerTypeSettings(key);
+        //     if (key != CustomLoggerKey.AlwaysLog)
+        //     {
+        //         var LogSettings = CustomLoggerSettings.GetLoggerTypeSettings(key);
 
-                if (!LogSettings.showLog)
-                    return;
+        //         if (!LogSettings.showLog)
+        //             return;
 
-                color = LogSettings.color;
-            }
+        //         color = LogSettings.color;
+        //     }
 
-            string msg = $"<color=#{color}>[{objContext.GetType()}]: {message}</color>";
-            Debug.LogFormat(logType, LogOption.None, objContext, msg);
-        }
+        //     string msg = $"<color=#{color}>[{objContext.GetType()}]: {message}</color>";
+        //     Debug.LogFormat(logType, LogOption.None, objContext, msg);
+        // }
     }
 }
