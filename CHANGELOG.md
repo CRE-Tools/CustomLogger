@@ -1,3 +1,14 @@
+## [0.3.0] - 2025-07-21
+
+### Added
+- `InterceptingLogHandler.cs` - Custom log handler that intercepts and processes log messages
+- `InterceptiorInitializer.cs` - Initializes the intercepting log handler
+
+### Changed
+- `CustomLoggerSettings.cs` - GetLoggerTypeSettings() is now public for InterceptingLogHandler access
+- `CustomLogger.cs` - Obsolete. Will be removed in the next version
+
+
 ## [0.2.0] - 2025-07-18
 
 ### Added

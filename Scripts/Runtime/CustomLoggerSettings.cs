@@ -97,7 +97,7 @@ namespace PUCPR.CustomLogger
 
         internal static SerializedObject GetSerializedSettings() => new SerializedObject(GetOrCreateSettings());
 
-        internal static (bool showLog, string color) GetLoggerTypeSettings(CustomLoggerKey logKey)
+        public static (bool showLog, string color) GetLoggerTypeSettings(CustomLoggerKey logKey)
         {
             if (logKey < 0)
                 return (false, "");
