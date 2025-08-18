@@ -3,9 +3,6 @@
 
 <h1 align="center">User Manual</h1>
 
-> [!IMPORTANT]
-> As of version 0.3.0, the logging system has been updated to use an intercepting log handler. The `CustomLogger.DebugLog` method is now obsolete and will be removed in the next version. Please update your code to use the new logging approach.
-
 ### Contents
 1. [Introduction](#introduction)
    - [Overview](#overview)
