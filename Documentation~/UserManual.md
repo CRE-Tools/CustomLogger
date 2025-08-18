@@ -78,7 +78,7 @@ Custom Logger is a Unity development tool that provides a powerful and flexible 
 4. Wait for recompile
 
 <p align="center">
-    <img width="400" height="400" src="/Documentation~/images/ProjectSettings.png" align="center" />
+    <img width="800" height="800" src="/Documentation~/images/ProjectSettings.png" align="center" />
 </p>
 
 ### Quick Start Guide
@@ -151,7 +151,7 @@ public class ExampleClass : MonoBehaviour
    <img width="400" height="400" src="/Documentation~/images/Hierarchy.png" align="center" />
 </p>
 <p align="center">
-   <img width="600" height="600" src="/Documentation~/images/SimpleDebug.png" align="center" />
+   <img width="800" height="800" src="/Documentation~/images/SimpleDebug.png" align="center" />
 </p>
 
 ## Package Structure
