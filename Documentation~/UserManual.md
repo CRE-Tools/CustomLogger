@@ -78,7 +78,7 @@ Custom Logger is a Unity development tool that provides a powerful and flexible 
 4. Wait for recompile
 
 <p align="center">
-    <img width="100" height="100" src="/Documentation~/images/ProjectSettings.png" align="center" />
+    <img width="400" height="400" src="/Documentation~/images/ProjectSettings.png" align="center" />
 </p>
 
 ### Quick Start Guide
@@ -127,7 +127,7 @@ This enum is used to identify the logging configuration.
  - Enabled: True
 
 <p align="center">
-    <img width="100" height="100" src="/Documentation~/images/MyKey.png" align="center" />
+    <img width="400" height="400" src="/Documentation~/images/MyKey.png" align="center" />
 </p>
 
 ```csharp
@@ -147,9 +147,9 @@ public class ExampleClass : MonoBehaviour
 ```
 
 <p align="center">
-   <img width="100" height="100" src="/Documentation~/images/Dropdown.png" align="center" />
-   <img width="100" height="100" src="/Documentation~/images/SimpleDebug.png" align="center" />
-   <img width="100" height="100" src="/Documentation~/images/Hierarchy.png" align="center" />
+   <img width="400" height="400" src="/Documentation~/images/Dropdown.png" align="center" />
+   <img width="400" height="400" src="/Documentation~/images/SimpleDebug.png" align="center" />
+   <img width="400" height="400" src="/Documentation~/images/Hierarchy.png" align="center" />
 </p>
 
 ## Package Structure
@@ -245,13 +245,13 @@ public class ExampleClass : MonoBehaviour
 }
 ```
 <p align="center">
-   <img width="100" height="100" src="/Documentation~/images/MyKey.png" align="center" />
-   <img width="100" height="100" src="/Documentation~/images/Dropdown.png" align="center" />
+   <img width="400" height="400" src="/Documentation~/images/MyKey.png" align="center" />
+   <img width="400" height="400" src="/Documentation~/images/Dropdown.png" align="center" />
 </p>
 
 <p align="center">
-   <img width="100" height="100" src="/Documentation~/images/CompleteDebug.png" align="center" />
-   <img width="100" height="100" src="/Documentation~/images/Hierarchy.png" align="center" />
+   <img width="400" height="400" src="/Documentation~/images/CompleteDebug.png" align="center" />
+   <img width="400" height="400" src="/Documentation~/images/Hierarchy.png" align="center" />
 </p>
 
 
