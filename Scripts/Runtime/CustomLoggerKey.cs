@@ -5,8 +5,7 @@ namespace PUCPR.CustomLogger
     public enum CustomLoggerKey
     {
         NeverLog,
-    AlwaysLog,
-    Resources,
-    Input
+    AlwaysLog
+    
     }
 }

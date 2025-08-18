@@ -1,3 +1,11 @@
+## [0.4.0] - 2025-08-18
+
+### Added
+- imges from UserManual documentation
+
+### Removed
+- Deprecated code and documentation references
+
 ## [0.3.0] - 2025-07-21
 
 ### Added
