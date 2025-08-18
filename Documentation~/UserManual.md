@@ -148,8 +148,10 @@ public class ExampleClass : MonoBehaviour
 
 <p align="center">
    <img width="400" height="400" src="/Documentation~/images/Dropdown.png" align="center" />
-   <img width="400" height="400" src="/Documentation~/images/SimpleDebug.png" align="center" />
    <img width="400" height="400" src="/Documentation~/images/Hierarchy.png" align="center" />
+</p>
+<p align="center">
+   <img width="600" height="600" src="/Documentation~/images/SimpleDebug.png" align="center" />
 </p>
 
 ## Package Structure
