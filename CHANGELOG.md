@@ -1,7 +1,8 @@
-## [0.4.0] - 2025-08-18
+## [1.0.0] - 2025-08-18
 
 ### Added
 - imges from UserManual documentation
+- UserManual pdf format
 
 ### Removed
 - Deprecated code and documentation references
