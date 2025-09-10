@@ -3,9 +3,6 @@
 
 <h1 align="center">User Manual</h1>
 
-> [!IMPORTANT]
-> As of version 0.3.0, the logging system has been updated to use an intercepting log handler. The `CustomLogger.DebugLog` method is now obsolete and will be removed in the next version. Please update your code to use the new logging approach.
-
 ### Contents
 1. [Introduction](#introduction)
    - [Overview](#overview)
@@ -77,13 +74,17 @@ Custom Logger is a Unity development tool that provides a powerful and flexible 
 3. Save the settings by clicking on the "Apply Settings" button
 4. Wait for recompile
 
+<p align="center">
+    <img width="800" height="800" src="/Documentation~/images/ProjectSettings.png" align="center" />
+</p>
+
 ### Quick Start Guide
 Here's a quick example of how to use Custom Logger in your code:
 
 Using Custom Logger
 - Use namespace PUCPR.CustomLogger
 
-#### New Basic Approach (v0.3.0+):
+#### Basic Approach:
 ```csharp
 using UnityEngine;
 using PUCPR.CustomLogger;
@@ -97,22 +98,6 @@ public class ExampleClass : MonoBehaviour
     }
 }
 ```
-
-#### Legacy Approach (Deprecated):
-```csharp
-using PUCPR.CustomLogger;
-
-public class ExampleClass : MonoBehaviour
-{
-    private void Start()
-    {
-        // Deprecated: Will be removed in next version
-        CustomLogger.DebugLog(LogType.Log, this, "Game started", CustomLoggerKey.AlwaysLog);
-    }
-}
-```
-
-The new approach provides the same functionality but integrates directly with Unity's logging system, making it more flexible and performant.
 
 If you want to use a custom key, you can configure a new key in the settings file.   
 This will generate a new enum value in the CustomLoggerKey enum.   
@@ -138,6 +123,10 @@ This enum is used to identify the logging configuration.
  - Color: Red
  - Enabled: True
 
+<p align="center">
+    <img width="400" height="400" src="/Documentation~/images/MyKey.png" align="center" />
+</p>
+
 ```csharp
 using PUCPR.CustomLogger;
 
@@ -154,6 +143,14 @@ public class ExampleClass : MonoBehaviour
 }
 ```
 
+<p align="center">
+   <img width="400" height="400" src="/Documentation~/images/Dropdown.png" align="center" />
+   <img width="400" height="400" src="/Documentation~/images/Hierarchy.png" align="center" />
+</p>
+<p align="center">
+   <img width="800" height="800" src="/Documentation~/images/SimpleDebug.png" align="center" />
+</p>
+
 ## Package Structure
 ### Assets
 -Assets/LoggerSettings/
@@ -167,7 +164,6 @@ public class ExampleClass : MonoBehaviour
 -Package/CustomLogger/Scripts/
   - Runtime/
     - CodeGenerator.cs (this is the code generator that generates the CustomLoggerKey enum)
-    - CustomLogger.cs (this is the legacy class for logging - deprecated in v0.3.0)
     - CustomLoggerType.cs (this is object type that configurations for keys are stored in the settings file)
     - CustomLoggerKey.cs (auto generated enum with all the keys configured in the settings file)
     - CustomLoggerSettings.cs (this is the settings manager that handles the settings file)
@@ -222,7 +218,7 @@ Follow standard log types:
    - Declare key as a field of the class to avoid redeclaring it every time it is used
 
 ### Examples
-#### Basic Logging Example (New Approach)
+
 ```csharp
 using UnityEngine;
 using PUCPR.CustomLogger;
@@ -247,80 +243,16 @@ public class ExampleClass : MonoBehaviour
     }
 }
 ```
+<p align="center">
+   <img width="400" height="400" src="/Documentation~/images/MyKey.png" align="center" />
+   <img width="400" height="400" src="/Documentation~/images/Dropdown.png" align="center" />
+</p>
 
-#### Legacy Logging Example (Deprecated)
-```csharp
-using PUCPR.CustomLogger;
+<p align="center">
+   <img width="400" height="400" src="/Documentation~/images/CompleteDebug.png" align="center" />
+   <img width="400" height="400" src="/Documentation~/images/Hierarchy.png" align="center" />
+</p>
 
-public class PlayerController : MonoBehaviour
-{
-   //This key is used to control all debug logs in this class
-    [SerializeField] private CustomLoggerKey playerDebugKey;
-    
-    void Start()
-    {
-        // Log player initialization if playerDebugKey is enabled
-        CustomLogger.DebugLog(LogType.Log, this, "Player initialized", playerDebugKey);
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            // Log player action if playerDebugKey is enabled
-            CustomLogger.DebugLog(LogType.Log, this, "Jump initiated", playerDebugKey);
-        }
-    }
-}
-```
-
-#### Error Logging Example
-```csharp
-using PUCPR.CustomLogger;
-
-public class GameManager : MonoBehaviour
-{
-    void LoadLevel(string levelName)
-    {
-        try
-        {
-            // Attempt to load level
-            // ...
-        }
-        catch (Exception e)
-        {
-            // Log error with error type. Notice that AlwaysLog is always enabled
-            Debug.LogFormat(this, 
-               $"Failed to load level {levelName}: {e.Message}", 
-               CustomLoggerKey.AlwaysLog, 
-               LogType.Error);
-        }
-    }
-}
-```
-
-#### Warning Example
-```csharp
-using PUCPR.CustomLogger;
-
-public class ResourceManager : MonoBehaviour
-{
-    //This key is used to control all debug logs in this class
-    [SerializeField] private CustomLoggerKey resourceDebugKey;
-    
-    void CheckResourceUsage()
-    {
-        if (currentMemoryUsage > maxMemoryThreshold)
-        {
-            // Log warning about high memory usage if resourceDebugKey is enabled
-            Debug.LogFormat(this, 
-                $"Memory usage is high: {currentMemoryUsage}MB", 
-                resourceDebugKey, 
-                LogType.Warning);
-        }
-    }
-}
-```
 
 ## Troubleshooting
 ### Common Issues

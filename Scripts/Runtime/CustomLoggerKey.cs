@@ -6,7 +6,6 @@ namespace PUCPR.CustomLogger
     {
         NeverLog,
     AlwaysLog,
-    Resources,
-    Input
+    Exemplo
     }
 }
