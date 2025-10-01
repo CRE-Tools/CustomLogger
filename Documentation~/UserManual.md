@@ -163,14 +163,14 @@ public class ExampleClass : MonoBehaviour
 ### Scripts
 -Package/CustomLogger/Scripts/
   - Runtime/
-    - CodeGenerator.cs (this is the code generator that generates the CustomLoggerKey enum)
     - CustomLoggerType.cs (this is object type that configurations for keys are stored in the settings file)
     - CustomLoggerKey.cs (auto generated enum with all the keys configured in the settings file)
-    - CustomLoggerSettings.cs (this is the settings manager that handles the settings file)
   - Editor/
     - EDITOR_Logger.cs (Custom Editor for the settings file)
     - InterceptingLogHandler.cs (Intercepts Unity log messages and applies custom formatting)
     - InterceptingLogInitializer.cs (Initializes the intercepting log handler)
+    - CodeGenerator.cs (this is the code generator that generates the CustomLoggerKey enum)
+    - CustomLoggerSettings.cs (this is the settings manager that handles the settings file)
 
 ### Settings
 - `Assets/LoggerSettings/Loggers.asset`: Contains all configurable settings per configuration key including:
