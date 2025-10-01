@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace PUCPR.CustomLogger
+namespace PUCPR.CustomLogger.Editor
 {
     public class CustomLoggerSettings : ScriptableObject
     {

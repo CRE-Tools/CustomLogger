@@ -1,3 +1,10 @@
+## [1.0.1] - 2025-10-01
+
+### Changed
+- root fixed for Scripts/Editor/:
+  - `CodeGenerator.cs`, 
+  - `CustomLoggerSettings.cs`
+
 ## [1.0.0] - 2025-08-18
 
 ### Added

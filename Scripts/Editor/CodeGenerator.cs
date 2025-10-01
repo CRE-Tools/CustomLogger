@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 
-namespace PUCPR.CustomLogger
+namespace PUCPR.CustomLogger.Editor
 {
     public static class CodeGenerator
     {
